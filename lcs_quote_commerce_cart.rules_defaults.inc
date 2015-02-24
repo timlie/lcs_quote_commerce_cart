@@ -104,11 +104,6 @@ function lcs_quote_commerce_cart_default_rules_configuration() {
                       }
                     },
                     { "data_set" : {
-                        "data" : [ "created-line-item:field-payment-modality" ],
-                        "value" : [ "line-item:field-payment-modality" ]
-                      }
-                    },
-                    { "data_set" : {
                         "data" : [ "created-line-item:commerce-product" ],
                         "value" : [ "line-item:commerce-product" ]
                       }
