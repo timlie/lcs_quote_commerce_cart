@@ -1,0 +1,9 @@
+name = LCS Quote Commerce Cart
+description = Custom quote creation from products in cart.
+core = 7.x
+package = ERPAL Quote
+
+dependencies[] = erpal_quote
+dependencies[] = commerce_cart
+dependencies[] = rules_conditional
+
