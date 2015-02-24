@@ -37,46 +37,29 @@ function lcs_quote_commerce_cart_default_rules_configuration() {
       }
     ],
     "DO" : [
-      { "CONDITIONAL" : [
-          {
-            "IF" : { "data_is_empty" : { "data" : [ "order:field-quote" ] } },
-            "DO" : [
-              { "entity_create" : {
-                  "USING" : {
-                    "type" : "commerce_order",
-                    "param_status" : "feedback",
-                    "param_type" : "quote",
-                    "param_owner" : [ "order:owner" ],
-                    "param_commerce_order_total" : [ "order:commerce-order-total" ]
-                  },
-                  "PROVIDE" : { "entity_created" : { "quote" : "Quote" } }
-                }
-              },
-              { "data_set" : { "data" : [ "quote:field-vendor" ], "value" : [ "order:field-vendor" ] } },
-              { "data_set" : {
-                  "data" : [ "quote:field-vendor-address" ],
-                  "value" : [ "order:field-vendor-address" ]
-                }
-              },
-              { "data_set" : {
-                  "data" : [ "quote:field-customer" ],
-                  "value" : [ "order:field-customer" ]
-                }
-              },
-              { "entity_save" : { "data" : [ "quote" ], "immediate" : 1 } }
-            ]
+      { "entity_create" : {
+          "USING" : {
+            "type" : "commerce_order",
+            "param_status" : "feedback",
+            "param_type" : "quote",
+            "param_owner" : [ "order:owner" ],
+            "param_commerce_order_total" : [ "order:commerce-order-total" ]
           },
-          { "ELSE" : [
-              { "entity_fetch" : {
-                  "USING" : { "type" : "commerce_order", "id" : [ "order:field-quote:order-id" ] },
-                  "PROVIDE" : { "entity_fetched" : { "quote" : "Quote" } }
-                }
-              },
-              { "data_set" : { "data" : [ "quote:commerce-line-items" ], "value" : { "value" : [] } } }
-            ]
-          }
-        ]
+          "PROVIDE" : { "entity_created" : { "quote" : "Quote" } }
+        }
       },
+      { "data_set" : { "data" : [ "quote:field-vendor" ], "value" : [ "order:field-vendor" ] } },
+      { "data_set" : {
+          "data" : [ "quote:field-vendor-address" ],
+          "value" : [ "order:field-vendor-address" ]
+        }
+      },
+      { "data_set" : {
+          "data" : [ "quote:field-customer" ],
+          "value" : [ "order:field-customer" ]
+        }
+      },
+      { "entity_save" : { "data" : [ "quote" ], "immediate" : 1 } },
       { "LOOP" : {
           "USING" : { "list" : [ "order:commerce-line-items" ] },
           "ITEM" : { "line_item" : "Current line item" },
